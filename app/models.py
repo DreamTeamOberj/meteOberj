@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, true
+from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, String, true
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -12,7 +12,6 @@ class User(Base):
     nom = Column(String)
     statut = Column(String)
 
-
 class Meteo(Base):
     __tablename__ = "meteo"
 
@@ -21,11 +20,11 @@ class Meteo(Base):
     image = Column(String)
     valeur = Column(Integer)
     
-class Entries(Base):
-    __tablename__ = "meto_users"
+class Entry(Base):
+    __tablename__ = "entries"
     id = Column(Integer, primary_key=True, index=True)
     id_meteo = Column(ForeignKey('meteo.id'))
-    id_user = Column(ForeignKey('user.id'))
+    id_user = Column(ForeignKey('users.id'))
     date = Column(DateTime)
     
     meteo = relationship("Meteo")

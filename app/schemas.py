@@ -1,24 +1,28 @@
 from datetime import datetime
 from pydantic import BaseModel
+from sqlalchemy import BLOB
 
+import models
 
-class EntrieBase(BaseModel):
+class EntryBase(BaseModel):
+    date: datetime
     id_meteo: int
     id_user: int
-    date: datetime
+    meteo: object
+    user: object
 
     class Config:
         orm_mode = True
 
 
-class EntrieCreate(EntrieBase):
+class EntryCreate(EntryBase):
     pass
 
 
-class EntrieUpdate(EntrieBase):
+class EntryUpdate(EntryBase):
     pass
 
-class EntrieDelete(EntrieBase):
+class EntryDelete(EntryBase):
     pass
 
 
@@ -44,7 +48,7 @@ class MeteoDelete(MeteoBase):
 class UserBase(BaseModel):
     prenom: str
     nom: str
-    status: str
+    statut: str
 
     class Config:
         orm_mode = True

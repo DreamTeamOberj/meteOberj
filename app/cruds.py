@@ -1,11 +1,12 @@
-from sqlalchemy.orm import Session
-
+from importlib.util import LazyLoader
+from sqlalchemy.orm import Session, selectinload
 import models, schemas
 from datetime import date
 
 
 # User CRUD
 def get_user(db: Session, user_id: int):
+    print(user_id)
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
@@ -23,16 +24,16 @@ def get_meteos(db: Session, skip: int = 0, limit: int = 100):
 
 
 # MU CRUD
-def get_entries(db: Session, user_id: int):
-    return db.query(models.Entries).filter(models.Entries.id_user == user_id).first()
+def get_entry(db: Session, user_id: int):
+    return db.query(models.Entry).filter(models.Entry.id_user == user_id).first()
 
 
-def get_all_entries(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Entries).offset(skip).limit(limit).all()
+def get_entries(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Entry).offset(skip).limit(limit).all()
 
 
-def create_entries(db: Session, entrie: schemas.EntrieCreate):
-    db_mu = models.Entries(id_user=entrie.id_user, id_meteo=entrie.id_meteo, date=date.today())
+def create_entry(db: Session, entry: schemas.EntryCreate):
+    db_mu = models.Entry(id_user=entry.id_user, id_meteo=entry.id_meteo, date=date.today())
     db.add(db_mu)
     db.commit()
     db.refresh(db_mu)

@@ -5,19 +5,19 @@ from sqlalchemy import BLOB
 import models
 
 class EntryBase(BaseModel):
-    date: datetime
-    id_meteo: int
-    id_user: int
     meteo: object
     user: object
 
     class Config:
         orm_mode = True
 
-
+class EntryGet(EntryBase):
+        date: datetime
+    
 class EntryCreate(EntryBase):
-    pass
-
+    id_user: int
+    id_meteo: int
+ 
 
 class EntryUpdate(EntryBase):
     pass
@@ -28,7 +28,7 @@ class EntryDelete(EntryBase):
 
 class MeteoBase(BaseModel):
     nom: str
-    valeur: str
+    valeur: int
 
     class Config:
         orm_mode = True

@@ -6,7 +6,6 @@ from datetime import date
 
 # User CRUD
 def get_user(db: Session, user_id: int):
-    print(user_id)
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
@@ -23,9 +22,9 @@ def get_meteos(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Meteo).offset(skip).limit(limit).all()
 
 
-# MU CRUD
-def get_entry(db: Session, user_id: int):
-    return db.query(models.Entry).filter(models.Entry.id_user == user_id).first()
+# Entry CRUD
+def get_entry(db: Session, entry_id: int):
+    return db.query(models.Entry).filter(models.Entry.id == entry_id).first()
 
 
 def get_entries(db: Session, skip: int = 0, limit: int = 100):

@@ -11,8 +11,7 @@ from database import get_db
 app = FastAPI()
 
 origins = [
-    "http://localhost",
-    "http://localhost:80",
+    "http://localhost:5173",
 ]
 
 app.add_middleware(

@@ -11,6 +11,7 @@ class User(Base):
     prenom = Column(String)
     nom = Column(String)
     statut = Column(String)
+    pseudo = Column(String)
 
 class Meteo(Base):
     __tablename__ = "meteo"
